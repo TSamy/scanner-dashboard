@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Tableau de bord de performance des scanners</title>
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+            background: linear-gradient(135deg, #dff6ff, #e0f7fa);
+        }
+        .dashboard {
+            display: flex;
+            flex-direction: column;
+            gap: 40px;
+        }
+        .dashboard-row {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+            margin: auto auto;
+        }
+        .chart-container {
+            flex: 1 1 45%;
+            
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.15);
+            box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border-radius: 10px;
+            border: 1px solid rgba(255, 255, 255, 0.18);
+        }
+        h2 {
+            text-align: center;
+            color: #05445E;
+        }
+    </style>
+</head>
+<body>
+    <h2>Tableau de bord de performance des scanners (Chargement automatique)</h2>
+    <div class="dashboard">
+        <div class="dashboard-row">
+            <div id="functionalPie" class="chart-container"></div>
+            <div id="functionalBar" class="chart-container"></div>
+        </div>
+    </div>
+
+    <script>
+        const onedriveLink = "https://raw.githubusercontent.com/TSamy/scanner-dashboard/refs/heads/main/csvjson.json";
+
+        fetch(onedriveLink)
+            .then(response => response.json())
+            .then(jsonData => {
+                genererTableauDeBord(jsonData);
+            })
+            .catch(error => {
+                alert("Erreur de chargement du fichier JSON depuis OneDrive. Veuillez vérifier le lien ou le partage public.");
+                console.error(error);
+            });
+
+        function genererTableauDeBord(data) {
+            const etatFonctionnement = { fonctionnel: 0, nonFonctionnel: 0 };
+            const scannersParInstitution = {};
+            const etatParReseau = {};
+            const institutionsManquantes = [];
+
+            data.forEach(entry => {
+                const total = parseInt(entry['# de scanners disponibles']);
+                const fonctionnels = parseInt(entry['# scanners fonctionnels']);
+                const reseau = entry['Reseau'];
+                const institution = entry['Institution'];
+
+                if (isNaN(total) || entry['# de scanners disponibles'] === 'Disparu') {
+                    institutionsManquantes.push(institution);
+                    return;
+                }
+
+                const nonFonctionnels = total - fonctionnels;
+                etatFonctionnement.fonctionnel += fonctionnels;
+                etatFonctionnement.nonFonctionnel += nonFonctionnels;
+
+                scannersParInstitution[institution] = fonctionnels;
+
+                if (!etatParReseau[reseau]) {
+                    etatParReseau[reseau] = { disponibles: 0, fonctionnels: 0 };
+                }
+                etatParReseau[reseau].disponibles += total;
+                etatParReseau[reseau].fonctionnels += fonctionnels;
+            });
+
+            Plotly.newPlot('functionalPie', [{
+                values: [etatFonctionnement.fonctionnel, etatFonctionnement.nonFonctionnel],
+                labels: ['Fonctionnels', 'Non fonctionnels'],
+                type: 'pie'
+            }], {
+                title: 'État de fonctionnement des scanners'
+            });
+
+            const nomsInstitutions = Object.keys(scannersParInstitution);
+            const valeurs = Object.values(scannersParInstitution);
+            Plotly.newPlot('functionalBar', [{
+                x: valeurs,
+                y: nomsInstitutions,
+                type: 'bar',
+                orientation: 'h'
+            }], {
+                title: 'Scanners fonctionnels par institution',
+                margin: { l: 200 }
+            });
+
+            // const nomsReseaux = Object.keys(etatParReseau);
+            // const disponibles = nomsReseaux.map(n => etatParReseau[n].disponibles);
+            // const fonctionnels = nomsReseaux.map(n => etatParReseau[n].fonctionnels);
+
+            // Plotly.newPlot('networkGroupBar', [
+            //     {
+            //         x: nomsReseaux,
+            //         y: disponibles,
+            //         name: 'Disponibles',
+            //         type: 'bar'
+            //     },
+            //     {
+            //         x: nomsReseaux,
+            //         y: fonctionnels,
+            //         name: 'Fonctionnels',
+            //         type: 'bar'
+            //     }
+            // ], {
+            //     barmode: 'group',
+            //     title: 'Disponibilité des scanners par réseau'
+            // });
+
+            // Plotly.newPlot('missingDevices', [{
+            //     x: institutionsManquantes,
+            //     y: Array(institutionsManquantes.length).fill(1),
+            //     type: 'bar'
+            // }], {
+            //     title: "Institutions avec dispositifs manquants ou disparus"
+            // });
+        }
+    </script>
+</body>
+</html>
