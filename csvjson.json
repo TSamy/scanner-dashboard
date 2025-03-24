@@ -1,0 +1,92 @@
+[
+  {
+    "Reseau": "FOSREF",
+    "Institution": "CEGYPEF",
+    "EMR": "isante plus",
+    "# de scanners disponibles": 2,
+    "# scanners fonctionnels": 0,
+    "Dernière date d'enregistrement": "",
+    "Commentaires": ""
+  },
+  {
+    "Reseau": "FOSREF",
+    "Institution": "Centre Jeunes Plaine du Cul-de-Sac",
+    "EMR": "isante plus",
+    "# de scanners disponibles": 2,
+    "# scanners fonctionnels": 2,
+    "Dernière date d'enregistrement": "",
+    "Commentaires": ""
+  },
+  {
+    "Reseau": "FOSREF",
+    "Institution": "CENTRE LAKAY DE CARREFOUR",
+    "EMR": "isante plus",
+    "# de scanners disponibles": 3,
+    "# scanners fonctionnels": 0,
+    "Dernière date d'enregistrement": "",
+    "Commentaires": ""
+  },
+  {
+    "Reseau": "FOSREF",
+    "Institution": "Centre Lakay de Grand-Rue",
+    "EMR": "isante plus",
+    "# de scanners disponibles": "Disparu",
+    "# scanners fonctionnels": 0,
+    "Dernière date d'enregistrement": "",
+    "Commentaires": ""
+  },
+  {
+    "Reseau": "FOSREF",
+    "Institution": "Centre Lakay de Pétion-Ville",
+    "EMR": "isante plus",
+    "# de scanners disponibles": 3,
+    "# scanners fonctionnels": 3,
+    "Dernière date d'enregistrement": "",
+    "Commentaires": ""
+  },
+  {
+    "Reseau": "FOSREF",
+    "Institution": "Centre Lakay de Petit-Goave",
+    "EMR": "isante plus",
+    "# de scanners disponibles": 2,
+    "# scanners fonctionnels": 0,
+    "Dernière date d'enregistrement": "",
+    "Commentaires": ""
+  },
+  {
+    "Reseau": "FOSREF",
+    "Institution": "Centre Lakay de Saint-Marc",
+    "EMR": "isante plus",
+    "# de scanners disponibles": 2,
+    "# scanners fonctionnels": 0,
+    "Dernière date d'enregistrement": "",
+    "Commentaires": ""
+  },
+  {
+    "Reseau": "FOSREF",
+    "Institution": "CEPOZ CENTRE ESPOIR",
+    "EMR": "isante plus",
+    "# de scanners disponibles": 2,
+    "# scanners fonctionnels": 0,
+    "Dernière date d'enregistrement": "",
+    "Commentaires": ""
+  },
+  {
+    "Reseau": "FOSREF",
+    "Institution": "POZ-Montrouis",
+    "EMR": "isante plus",
+    "# de scanners disponibles": 0,
+    "# scanners fonctionnels": 0,
+    "Dernière date d'enregistrement": "",
+    "Commentaires": "Le site a été cambriolé, plusieurs materiels ont été emportés parmi lesquels deux (2) lecteurs biométriques."
+  },
+  {
+    "Reseau": "FOSREF",
+    "Institution": "POZ Domus Mariae",
+    "EMR": "isante plus",
+    "# de scanners disponibles": 1,
+    "# scanners fonctionnels": 0,
+    "Dernière date d'enregistrement": "",
+    "Commentaires": ""
+  }
+]
